@@ -24,7 +24,7 @@ class CacheFetch implements PrefixInterceptor
 
     public function __invoke($proxy, $instance, $methodName, $methodArguments, &$returnEarly)
     {
-        $cacheId = $this->identityGenerator->createIdFor($methodName, $methodArguments);
+        $cacheId = $this->identityGenerator->createIdFor($instance, $methodName, $methodArguments);
         if (false == $this->cacheAdapter->contains($cacheId)) {
             return;
         }

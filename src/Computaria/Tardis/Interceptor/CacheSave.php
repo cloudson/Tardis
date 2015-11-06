@@ -24,7 +24,7 @@ class CacheSave implements SufixInterceptor
 
     public function __invoke($proxy, $instance, $methodName, $methodArguments, $returnValue, &$returnEarly)
     {
-        $cacheId = $this->identityGenerator->createIdFor($methodName, $methodArguments);
+        $cacheId = $this->identityGenerator->createIdFor($instance, $methodName, $methodArguments);
         if (false == $this->cacheAdapter->contains($cacheId)) {
             $this->cacheAdapter->save($cacheId, $returnValue);
         }

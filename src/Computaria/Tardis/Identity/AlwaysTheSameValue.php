@@ -14,7 +14,7 @@ class AlwaysTheSameValue implements IdentityGenerator
     /**
      * @inherit
      */
-    public function createIdFor($methodName, array $methodArguments)
+    public function createIdFor($instance, $methodName, array $methodArguments)
     {
         return $this->value;
     }

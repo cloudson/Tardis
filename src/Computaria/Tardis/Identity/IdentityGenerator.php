@@ -10,9 +10,10 @@ interface IdentityGenerator
      * If the same arguments are presented again, the same identity
      * must be returned.
      *
+     * @param   Object  $instance
      * @param   string  $methodName
      * @param   array   $methodArguments
      * @return  string
      */
-    public function createIdFor($methodName, array $methodArguments);
+    public function createIdFor($instance, $methodName, array $methodArguments);
 }

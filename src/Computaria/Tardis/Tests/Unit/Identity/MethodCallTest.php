@@ -19,11 +19,12 @@ class MethodCallTest extends \PHPUnit_Framework_TestCase
      */
     public function identity_for_same_method_and_arguments_should_be_the_same()
     {
+        $entity = new \StdClass; 
         $methodName = 'travelTo';
         $methodArguments = ['2015AD', '1018AD'];
 
-        $firstIdentity = $this->generator->createIdFor($methodName, $methodArguments);
-        $secondIdentity = $this->generator->createIdFor($methodName, $methodArguments);
+        $firstIdentity = $this->generator->createIdFor($entity, $methodName, $methodArguments);
+        $secondIdentity = $this->generator->createIdFor($entity, $methodName, $methodArguments);
 
         $this->assertEquals(
             $firstIdentity,
@@ -37,8 +38,9 @@ class MethodCallTest extends \PHPUnit_Framework_TestCase
      */
     public function identity_for_different_arguments_should_be_different()
     {
-        $firstIdentity = $this->generator->createIdFor('createFromFormat', ['d', '15']);
-        $secondIdentity = $this->generator->createIdFor('createFromFormat', ['m', '12']);
+        $entity = new \StdClass;
+        $firstIdentity = $this->generator->createIdFor($entity, 'createFromFormat', ['d', '15']);
+        $secondIdentity = $this->generator->createIdFor($entity, 'createFromFormat', ['m', '12']);
 
         $this->assertNotEquals(
             $firstIdentity,
@@ -58,8 +60,9 @@ class MethodCallTest extends \PHPUnit_Framework_TestCase
         $methodName = 'createIdForUnserializableArgument';
         $methodArguments = [$unserializableArgument];
 
-        $firstIdentity = $this->generator->createIdFor($methodName, $methodArguments);
-        $secondIdentity = $this->generator->createIdFor($methodName, $methodArguments);
+        $entity = new \StdClass; 
+        $firstIdentity = $this->generator->createIdFor($entity, $methodName, $methodArguments);
+        $secondIdentity = $this->generator->createIdFor($entity, $methodName, $methodArguments);
 
         $this->assertEquals(
             $firstIdentity,
